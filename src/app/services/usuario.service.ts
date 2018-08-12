@@ -8,9 +8,18 @@ export class UsuarioService {
   private url = `https://reqres.in/api`;
   constructor( private http: HttpClient ) { }
   getUsers() {
-    return this.http.get(`${ this.url }/users?per_page=6`)
+    return this.http.get(`${ this.url }/users?per_page=6&delay=1`)
     .pipe(
       map( resp => resp['data'])
+    );
+  }
+  getUserById( id: string ) {
+    return this.http.get(`${ this.url }/users/${ id }`)
+    .pipe(
+      map( resp => {
+
+        return resp['data'];
+      })
     );
   }
 }
