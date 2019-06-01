@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as usuarioActions from '../actions';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { UsuarioService } from '../../services/usuario.service';
@@ -11,8 +11,9 @@ export class UsuarioEffects {
     public usuarioService: UsuarioService
   ) {}
   @Effect()
-  cargarUsuarios$ = this.actions$.ofType( usuarioActions.CARGAR_USUARIO )
+  cargarUsuarios$ = this.actions$
   .pipe(
+    ofType(usuarioActions.ActionTypes.CARGAR_USUARIO ),
     switchMap( (action ) => {
       const id = action['id'];
       return this.usuarioService.getUserById(id)

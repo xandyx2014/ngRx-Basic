@@ -1,6 +1,5 @@
 import { Usuario } from '../../models/usuario.model';
 import * as fromUsuarios from '../actions';
-
 export interface UsuarioState {
   user: Usuario;
   loaded: boolean;
@@ -17,20 +16,20 @@ const estadoInicial: UsuarioState = {
 
 export function usuarioReducer( state = estadoInicial, action: fromUsuarios.usuarioAcciones): UsuarioState {
   switch (action.type) {
-    case fromUsuarios.CARGAR_USUARIO:
+    case fromUsuarios.ActionTypes.CARGAR_USUARIO:
       return {
         ...state,
         loading: true,
         error: null
       };
-    case fromUsuarios.CARGAR_USUARIO_SUCCESS:
+    case fromUsuarios.ActionTypes.CARGAR_USUARIO_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
         user: {...action.usuario}
       };
-    case fromUsuarios.CARGAR_USUARIO_FAIL:
+    case fromUsuarios.ActionTypes.CARGAR_USUARIO_FAIL:
     return {
       ...state,
       loaded: false,
